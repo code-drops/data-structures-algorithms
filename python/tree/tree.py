@@ -3,9 +3,11 @@ class node:
         self.left = None
         self.data = x
         self.right = None
+
 class tree:
     def __init__(self):
         self.root = None
+    
     def insert(self,x):
         newnode = node(x)
         if self.root==None:
@@ -26,21 +28,29 @@ class tree:
                         return
                     else:
                         temp = temp.right
+    
+    # preorder of a tree
     def preorder(self,root):
         if root!=None:
             print(root.data,end=' ')
             self.preorder(root.left)
             self.preorder(root.right)
+    
+    # inorder of a tree
     def inorder(self,root):
         if root!=None:
             self.inorder(root.left)
             print(root.data,end=' ')
             self.inorder(root.right)
+    
+    # postorder of a tree
     def postorder(self,root):
         if root!=None:
             self.postorder(root.left)
             self.postorder(root.right)
             print(root.data,end=' ')
+    
+    # search an element in a tree
     def search(self,x):
         temp = self.root
         while True:
@@ -55,6 +65,8 @@ class tree:
                     temp = temp.left
                 else:
                     temp = temp.right
+    
+    # minimum element in a tree in bst
     def minimum(self):
         if self.root==None:
             print('No root node')
@@ -67,6 +79,8 @@ class tree:
                     return
                 else:
                     temp = temp.left
+    
+    # maximum element of the tree in bst
     def maximum(self):
         temp = self.root
         if temp==None:
@@ -79,6 +93,8 @@ class tree:
                     return
                 else:
                     temp = temp.right
+    
+    # level order traversal
     def levelorder(self):
         queue = []
         temp = self.root
@@ -90,6 +106,8 @@ class tree:
                 queue.append(current.left)
             if current.right!=None:
                 queue.append(current.right)
+    
+    # iterative preorder of the tree
     def iterative_Preorder(self):
         temp = self.root
         if temp==None:
@@ -105,6 +123,8 @@ class tree:
                     stack.append(temp.right)
                 if temp.left != None:
                     stack.append(temp.left)
+    
+    # iterative inorder of the tree
     def iterative_inorder(self):
         temp = self.root
         stack = []
@@ -117,6 +137,8 @@ class tree:
             temp = stack.pop()
             print(f'{temp.data}',end=' ')
             temp = temp.right
+    
+    # delete a particular node
     def deleteNode(self,root,x):
         if root==None:
             return root
@@ -138,21 +160,29 @@ class tree:
                 root.data = temp.data
                 root.right = self.deleteNode(root.right,temp.data)
         return root
+    
+    # size of the tree (number of elements)
     def size(self,root):
         if root==None:
             return 0
         else:
             return self.size(root.left)+self.size(root.right) + 1
+    
+    # height of tree
     def height(self,root):
         if root==None:
             return -1
         else:
             return max(self.height(root.left),self.height(root.right))+1
+    
+    # maximum element in a tree
     def maximumelement(self,root):
         if root==None:
             return 0
         else:
             return max(self.maximumelement(root.left),self.maximumelement(root.right),root.data)
+    
+    # identical of two trees
     def identical(self,root1,root2):
         if root1 == root2 == None:
             return True
@@ -161,6 +191,8 @@ class tree:
                 return False
             else:
                 return self.identical(root1.left,root2.left) and self.identical(root1.right,root2.right)
+    
+    # symmetricity of two trees
     def symmetric(self,root1,root2):
         if root1 == root2 == None:
             return True
@@ -170,11 +202,13 @@ class tree:
             else:
                 return self.symmetric(root1.left,root1.right)
 
+    # diameter of tree ( max length between two nodes )
     def diameter(self,root):
         if root==None:
             return 0
         else:
             return max(self.height(root.left)+self.height(root.right)+1,self.diameter(root.left),self.diameter(root.right))
+
 t = tree()
 for i in [5,1,2,9,6,3]:
     t.insert(i)
